@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Database\Seeder;
-
 class AnswersTableSeeder extends Seeder
 {
     /**
@@ -11,13 +9,15 @@ class AnswersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = App\User::inRandomOrder();
-        $user->each(function ($user) {
-            $question = App\Question::inRandomOrder()->first();
-            $answer = factory(\App\Answer::class)->make();
-            $answer->user()->associate($user);
-            $answer->question()->associate($question);
-            $answer->save();
-        });
+        $users = App\User::inRandomOrder();
+        for ($i = 1; $i <= 6; $i++) {
+            $users->each(function ($user) {
+                $question = App\Question::inRandomOrder()->first();
+                $answer = factory(\App\Answer::class)->make();
+                $answer->user()->associate($user);
+                $answer->question()->associate($question);
+                $answer->save();
+            });
+        }
     }
 }
