@@ -35,10 +35,9 @@ class AnswerController extends Controller
     public function store(Request $request, $question)
     {
         $input = $request->validate([
-            'body' => 'required|alpha|min:5',
+            'body' => 'required|min:5',
         ], [
             'body.required' => 'Body is required',
-            'body.alpha' => 'Body must be alphanumeric',
             'body.min' => 'Body must be at least 5 characters',
         ]);
         $input = request()->all();
@@ -79,9 +78,19 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $question, $answer)
     {
-        //
+        $input = $request->validate([
+            'body' => 'required|min:5',
+        ], [
+            'body.required' => 'Body is required',
+            'body.min' => 'Body must be at least 5 characters',
+        ]);
+
+        $answer = Answer::find($answer);
+        $answer->body = $request->body;
+        $answer->save();
+        return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
     }
     /**
      * Remove the specified resource from storage.
@@ -93,8 +102,6 @@ class AnswerController extends Controller
     {
         $answer = Answer::find($answer);
         $answer->delete();
-        return redirect()->route('questions.show',['question_id' => $question])->with('message', 'Saved');
+        return redirect()->route('questions.show',['question_id' => $question])->with('message', 'Delete');
     }
 }
-
-

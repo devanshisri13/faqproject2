@@ -8,7 +8,7 @@
                     <div class="card-header">Question</div>
 
                     <div class="card-body">
-                        @include('flash.status')
+
                         {{$question->body}}
                     </div>
                     <div class="card-footer">
