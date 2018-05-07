@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('user_id');
             $table->longText('body');
             $table->timestamps();
+            $table->text('html')->nullable()->default(null);
 
         });
     }

@@ -16,8 +16,14 @@
                            href="{{ route('questions.edit',['id'=> $question->id])}}">
                             Edit Question
                         </a>
+                        <div class="card-footer">
+                            <a class="btn btn-primary float-right"
+                               href="{{ route('questions.edit',['id'=> $question->tags])}}">
+                                Hashtag
+                            </a>
 
-                        {{ Form::open(['method'  => 'DELETE', 'route' => ['questions.destroy', $question->id]])}}
+
+                            {{ Form::open(['method'  => 'DELETE', 'route' => ['questions.destroy', $question->id]])}}
                         <button class="btn btn-danger float-right mr-2" value="submit" type="submit" id="submit">Delete
                         </button>
                         {!! Form::close() !!}

@@ -21,4 +21,5 @@ class HashtagTest extends TestCase
         $question->user()->associate($user);
         $this->assertTrue($question->save());
     }
+
 }
