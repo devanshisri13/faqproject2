@@ -23,14 +23,5 @@ class QuestionTest extends TestCase
         $this->assertTrue($question->save());
     }
 
-    public  function testMonthlyQuestions()
-    {
 
-        $questions = DB::table('questions')
-            ->whereMonth('created_at', '05')
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
-        $this->assertTrue($questions->save());
-    }
 }

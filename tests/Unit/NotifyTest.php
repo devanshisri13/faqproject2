@@ -2,11 +2,12 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Notifications\NotificationSender;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
+use App\Notifications\notify;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class NotifyTest extends TestCase
 {
@@ -15,19 +16,30 @@ class NotifyTest extends TestCase
      *
      * @return void
      */
-    public function testNotify()
+    public function testNotification()
     {
-         NotificationSender::fake();
+        Notification::fake();
 
-        $this->profile();
 
-        $this->question(
-            route('questions.answers.store', $this->question->id),
-            $this->answer->toArray()
+
+        $user =$this->question;
+        Notification::assertSentTo(
+            $user,
+            OrderShipped::class,
+            function ($notification, $channels) use ($user) {
+                $answer =$this->answer;
+                return $notification->order->id === $answer->id;
+            }
         );
 
-        Notification::assertSentTo($this->user, AnswerPosted::class);
+        // Assert a notification was sent to the given users...
+        Notification::assertSentTo(
+            [$user], AnsweredQuestion::class
+        );
+
+        // Assert a notification was not sent...
+        Notification::assertNotSentTo(
+            [$user], AnotherNotification::class
+        );
     }
-
-
 }
