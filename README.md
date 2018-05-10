@@ -8,12 +8,13 @@ To run the FAQ project:
 4. setup database/with sqlite or other(https://laravel.com/docs/5.6/database)
 
 Epic And User stories for the final Exam Feature:
-New Feature in the FAQ project : Tagging system
+New Feature in the FAQ project : Notification and monthly questions using view composer
 Epic:
-Implemented tagging sysytem to filter the questions in the FAQ project.
+Implemented the notification system when a new question or a new answer is added and a feature using
+ view composer showing current month's questions.
 
 User Stories:
-1. As a user, I can write questions with hashtags(#)which will classify the types of questions in the project.
-2. As a user, When writing the question and hashtag I will get options of Hashtags similar to the hashtag I'm writing which will save user's time.
-3. As a user, I can write the questions with a single or mutlitple hashtags.
-4. As a user, After posting the questions with hashtags, the hashtag  will convert into hyperlinks.
+1. As a user, when I add a new question, I will get a notification on mailtrap. .
+2. As a user, when I add a new answer, I will get a notification on mailtrap .
+3. As a user, I can view the monthly updated questions in the home page .
+4. As a user, I can view all the questions added by the users till date.
