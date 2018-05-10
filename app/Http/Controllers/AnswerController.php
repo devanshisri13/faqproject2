@@ -4,6 +4,7 @@ use App\Answer;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Notifications\notify;
 class AnswerController extends Controller
 {
     public function __construct()
@@ -46,7 +47,12 @@ class AnswerController extends Controller
         $Answer->user()->associate(Auth::user());
         $Answer->question()->associate($question);
         $Answer->save();
+
+        Auth::user()->notify(new notify());
+
+
         return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
+
     }
     /**
      * Display the specified resource.

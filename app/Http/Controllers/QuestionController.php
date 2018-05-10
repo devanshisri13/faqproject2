@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\notify;
 class QuestionController extends Controller
 {
     public function __construct()
@@ -48,6 +49,7 @@ class QuestionController extends Controller
         $question = new Question($input);
         $question->user()->associate(Auth::user());
         $question->save();
+        Auth::user()->notify(new notify());
         return redirect()->route('home')->with('message', 'IT WORKS!');
         // return redirect()->route('questions.show', ['id' => $question->id]);
     }
