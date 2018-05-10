@@ -94,6 +94,15 @@
         @include('flash.messages')
         @include('flash.status')
         @yield('content')
+        </div>
+        <div class="col-md-2">
+            <div class="float-sm-right">
+                @if (Auth::user())
+                    @include('monthlyQuestions')
+                @endif
+
+            </div>
+        </div>
     </main>
 </div>
 </body>

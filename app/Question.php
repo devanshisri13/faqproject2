@@ -14,4 +14,12 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer');
     }
+    public function monthlyQuestions(View $view)
+    {
+        return  $view-> with ('mostlyQuestions',DB::table('questions')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get());
+    }
+
 }
