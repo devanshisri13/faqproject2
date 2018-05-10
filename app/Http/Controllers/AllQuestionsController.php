@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-use App\Question;
 use DB;
+use App\Question;
 
-class MonthlyQuestionsController extends Controller
+
+class AllQuestionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware('auth');
     }
-
     public function index(Question $question)
     {
-        $monthlyQuestions = DB::table('questions')
-            ->whereMonth('created_at', '05')
-            ->orderBy('created_at', 'desc')->paginate(6);
+        $allQuestions = DB::table('questions')
+            ->orderBy('created_at', 'desc')->paginate(16);
 
-        return view ('mQuestions')->with('monthlyQuestions',$monthlyQuestions);
+        //->get());
+        //dd($allQuestions);
+        return view ('allQuestions')->with('allQuestions',$allQuestions);
+
     }
 
 

@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">This Month Questions
+        <div class="card-header">All Questions
             <div class="card-body">
                 <div class="card-deck">
-                    @foreach($monthlyQuestions as $questions)
+                    @foreach($allQuestions as $questions)
                         <div class="col-sm-4 d-flex align-items-stretch">
                             <div class="card mb-3 ">
                                 <div class="card-header">
@@ -22,12 +22,10 @@
                                     <p class="card-text">
 
                                         <a class="btn btn-primary float-right"
-                                           href="{{ route('questions.show', ['id' => $questions->id]) }}">Answer Question
+                                           href="{{ route('questions.show', ['id' => $questions->id]) }}">Answer
+                                            Question </a>
 
-
-
-
-                                    </a>
+                                        </a>
                                     </p>
                                 </div>
                             </div>
@@ -44,7 +42,7 @@
 
         <div class="card-footer">
             <div class="float-left">
-                {{ $monthlyQuestions->links() }}
+                {{ $allQuestions->links() }}
             </div>
         </div>
 
